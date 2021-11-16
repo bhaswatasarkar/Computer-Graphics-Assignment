@@ -25,11 +25,13 @@ private:
     Ui::MainWindow *ui;
     QPoint p1,p2;
     int x_max,x_min,y_max,y_min;
-    int R,G,B;
+    int R=255,G=255,B=255;
     QRgb currentcolor;
+    QPoint cp1,cp2;
+
    // QRgb pressedpointcolor;
 
-
+/*
     typedef struct edgebucket
     {
         int ymax;   //max y-coordinate of edge
@@ -50,7 +52,7 @@ private:
     EdgeTableTuple EdgeTable[maxHt], ActiveEdgeTuple;
 
     std::vector<std::pair<int,int> > EdgeList;
-    std::vector<std::pair<int,int> > BezList;
+    std::vector<std::pair<int,int> > BezList;*/
 
     void point(int x,int y,int r=255,int g=255,int b=0);
     void point(int x,int y, QRgb cc);
@@ -68,7 +70,7 @@ private slots:
 
     void on_set_point2_clicked();
 
-    void on_pushButton_clicked();
+    void on_resetButton_clicked();
 
     int changeX(int x);
 
@@ -109,12 +111,53 @@ private slots:
     void on_gridsize_valueChanged();
     void on_draw_polygon_clicked();
     void draw_bresenhamLine(QPoint,QPoint);
+    void draw_bresenhamLine(QPoint,QPoint,int,int,int);
     void BoundaryFill4(int x, int y, QRgb newcolor, QRgb edgecolor);
     void on_boundaryfill4button_clicked();
     void BoundaryFill8(int x, int y, QRgb newcolor, QRgb edgecolor);
     void FloodFill4 (int x, int y, QRgb newcolor,QRgb oldcolor);
     void FloodFill8 (int x, int y, QRgb newcolor,QRgb oldcolor);
 
+
+    ///////////////////////
+    void initEdgeTable ();
+
+    void storeEdgeInTable (int, int, int, int);
+
+    void on_scanlinefill_clicked();
+
+    int* matMul3x3(double mat[3][3],int coord[3]);
+
+    void drawPoly(std::vector<std::pair<int,int> > vlist,int R,int G,int B);
+
+    void on_translationButton_clicked();
+
+    void on_scaleButton_clicked();
+
+    void on_rotateButton_clicked();
+
+    void on_shearButton_clicked();
+
+    void on_reflectionXButton_clicked();
+    void on_reflectionButton_clicked();
+    void on_reflectionYButton_clicked();
+    void on_reflectwrtarbitraryline_clicked();
+
+
+    //////////
+    int computeCode(int xa, int ya);
+    void cohenSutherlandClip(int x1, int y1,int x2, int y2);
+    void on_lineClippingButton_clicked();
+    int x_intersect(int x1, int y1, int x2, int y2,int x3, int y3, int x4, int y4);
+    int y_intersect(int x1, int y1, int x2, int y2,int x3, int y3, int x4, int y4);
+    void draw_Window();
+    void on_setCP1Button_clicked();
+    void on_setCP2Button_clicked();
+    void clip(int x1, int y1, int x2, int y2);
+    void on_reflectionOriginButton_clicked();
+    void on_drawlineforclipping_clicked();
+
+    void on_polygonClippingButton_clicked();
 };
 
 #endif // MAINWINDOW_H
