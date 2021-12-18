@@ -27,6 +27,7 @@ private:
     int x_max,x_min,y_max,y_min;
     int R=255,G=255,B=255;
     QRgb currentcolor;
+    QRgb polygoncolor;
     QPoint cp1,cp2;
 
    // QRgb pressedpointcolor;

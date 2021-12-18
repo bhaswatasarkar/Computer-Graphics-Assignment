@@ -62,15 +62,13 @@ void MainWindow::on_draw_polygon_clicked()
     initEdgeTable();
 }
 
-
+//////not used
 void MainWindow::on_boundaryfill4button_clicked()
 {
    // p1.setX(-1);
     //p1.setY(-1);
    // ui->boundaryfill4button->toggle();
 }
-
-//////not used
 void MainWindow::on_X_clicked(){}
 void MainWindow::on_duumydda_clicked(){}
 void MainWindow::on_pushButton_2_clicked(){}
@@ -298,6 +296,7 @@ void MainWindow::Mouse_Pressed()
         //////////////////
         draw_bresenhamLine(p1,p2);
         p1=p2;
+        polygoncolor=qRgb(R,G,B);
     }
     else if(ui->boundaryfill4button->isChecked())
 
@@ -305,14 +304,14 @@ void MainWindow::Mouse_Pressed()
         p1.setX(ui->frame->x);
         p1.setY(ui->frame->y);
 
-       BoundaryFill4((p1.rx()/k)*k+k/2,(p1.ry()/k)*k+k/2,qRgb(R,G,B),qRgb(255,255,0));
+       BoundaryFill4((p1.rx()/k)*k+k/2,(p1.ry()/k)*k+k/2,qRgb(R,G,B),polygoncolor);
     }
     else if(ui->boundaryfill8button->isChecked())
     {
         p1.setX(ui->frame->x);
         p1.setY(ui->frame->y);
 
-       BoundaryFill8((p1.rx()/k)*k+k/2,(p1.ry()/k)*k+k/2,qRgb(R,G,B),qRgb(255,255,0));
+       BoundaryFill8((p1.rx()/k)*k+k/2,(p1.ry()/k)*k+k/2,qRgb(R,G,B),polygoncolor);
     }
     else if(ui->floodfill4button->isChecked())
     {
@@ -1955,7 +1954,7 @@ void MainWindow::on_reflectionOriginButton_clicked()
 
 void MainWindow::on_reflectwrtarbitraryline_clicked()
 {
-    int gridsize = ui->gridsize->value();
+     int gridsize = ui->gridsize->value();
     std::vector<std::pair<int,int> > old_vertex;
     for(int i=0;i<vertex_list.size();i++)
     {
@@ -2249,7 +2248,7 @@ void MainWindow::on_drawlineforclipping_clicked()
 
 const int MAX_POINTS = 20;
 
-// Returns x-value of point of intersectipn of two
+// Returns x-value of point of intersection of two
 // lines
 int MainWindow:: x_intersect(int x1, int y1, int x2, int y2,int x3, int y3, int x4, int y4)
 {
@@ -2264,7 +2263,7 @@ int MainWindow:: x_intersect(int x1, int y1, int x2, int y2,int x3, int y3, int 
     return retx;
 }
 
-// Returns y-value of point of intersectipn of
+// Returns y-value of point of intersection of
 // two lines
 int MainWindow:: y_intersect(int x1, int y1, int x2, int y2,int x3, int y3, int x4, int y4)
 {
@@ -2385,6 +2384,7 @@ void MainWindow::on_polygonClippingButton_clicked()
     }
 
     drawPoly(old_vertex,0,0,0);
-    drawPoly(vertex_list,255,255,255);
     draw_Window();
+    drawPoly(vertex_list,255,255,255);
+
 }
